@@ -23,5 +23,6 @@
         android:id="@+id/ccl_layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:ccl_LayoutId="@layout/choice_item"
         app:ccl_spanCount="4" />
 </LinearLayout>
