@@ -1,0 +1,2 @@
+include ':app', ':choice'
+rootProject.name='ChoicesLayout'
