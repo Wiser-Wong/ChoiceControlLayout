@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
  * 
  *            选择控件
  */
-public class ChoicesRuleLayout<T> extends LinearLayout {
+public class ChoiceRuleLayout<T> extends LinearLayout {
 
 	private int						spanCount	= 3;
 
@@ -34,12 +34,12 @@ public class ChoicesRuleLayout<T> extends LinearLayout {
 
 	private List<View>				views		= new ArrayList<>();
 
-	public ChoicesRuleLayout(Context context) {
+	public ChoiceRuleLayout(Context context) {
 		super(context);
 		init(context, null);
 	}
 
-	public ChoicesRuleLayout(Context context, @Nullable AttributeSet attrs) {
+	public ChoiceRuleLayout(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		init(context, attrs);
 	}
@@ -48,10 +48,10 @@ public class ChoicesRuleLayout<T> extends LinearLayout {
 
 		mInflater = LayoutInflater.from(context);
 
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoicesRuleLayout);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoiceRuleLayout);
 		if (ta != null) {
-			choiceLayoutId = ta.getResourceId(R.styleable.ChoicesRuleLayout_crl_layoutId, -1);
-			spanCount = ta.getInt(R.styleable.ChoicesRuleLayout_crl_spanCount, spanCount);
+			choiceLayoutId = ta.getResourceId(R.styleable.ChoiceRuleLayout_crl_layoutId, -1);
+			spanCount = ta.getInt(R.styleable.ChoiceRuleLayout_crl_spanCount, spanCount);
 			ta.recycle();
 		}
 
@@ -108,7 +108,7 @@ public class ChoicesRuleLayout<T> extends LinearLayout {
 			view.setOnClickListener(new OnClickListener() {
 
 				@Override public void onClick(View v) {
-					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoicesRuleLayout.this,view, position, t);
+					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoiceRuleLayout.this,view, position, t);
 				}
 			});
 		}

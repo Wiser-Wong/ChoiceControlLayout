@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * 
  *         选择适配器
  */
-public class ChoicesRecycleViewAdapter<T> extends BaseAdapter<T, ChoicesRecycleViewAdapter.ChoicesHolder> {
+public class ChoiceRecycleViewAdapter<T> extends BaseAdapter<T, ChoiceRecycleViewAdapter.ChoicesHolder> {
 
 	private int					choiceLayoutId;
 
@@ -18,7 +18,7 @@ public class ChoicesRecycleViewAdapter<T> extends BaseAdapter<T, ChoicesRecycleV
 
 	private OnChoiceCallBack<T>	onChoiceCallBack;
 
-	ChoicesRecycleViewAdapter(Context context, int choiceLayoutId) {
+	ChoiceRecycleViewAdapter(Context context, int choiceLayoutId) {
 		super(context);
 		this.choiceLayoutId = choiceLayoutId;
 	}

@@ -17,7 +17,7 @@ import android.view.ViewGroup;
  * 
  *            不规则布局排版
  */
-public class ChoicesIrregularLayout<T> extends ViewGroup {
+public class ChoiceIrregularLayout<T> extends ViewGroup {
 
 	private int					mUsedWidth			= 0;
 
@@ -45,17 +45,17 @@ public class ChoicesIrregularLayout<T> extends ViewGroup {
 
 	private OnChoiceListener<T>	onChoiceListener;
 
-	public ChoicesIrregularLayout(Context context) {
+	public ChoiceIrregularLayout(Context context) {
 		this(context, null);
 		init(context, null);
 	}
 
-	public ChoicesIrregularLayout(Context context, AttributeSet attrs) {
+	public ChoiceIrregularLayout(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 		init(context, attrs);
 	}
 
-	public ChoicesIrregularLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+	public ChoiceIrregularLayout(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init(context, attrs);
 	}
@@ -63,10 +63,10 @@ public class ChoicesIrregularLayout<T> extends ViewGroup {
 	private void init(Context context, AttributeSet attrs) {
 		mInflater = LayoutInflater.from(context);
 
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoicesIrregularLayout);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoiceIrregularLayout);
 		if (ta != null) {
-			choiceLayoutId = ta.getResourceId(R.styleable.ChoicesIrregularLayout_cil_layoutId, -1);
-			isFillSurplusWidth = ta.getBoolean(R.styleable.ChoicesIrregularLayout_cil_isFillSurplusWidth, isFillSurplusWidth);
+			choiceLayoutId = ta.getResourceId(R.styleable.ChoiceIrregularLayout_cil_layoutId, -1);
+			isFillSurplusWidth = ta.getBoolean(R.styleable.ChoiceIrregularLayout_cil_isFillSurplusWidth, isFillSurplusWidth);
 			ta.recycle();
 		}
 	}
@@ -222,7 +222,7 @@ public class ChoicesIrregularLayout<T> extends ViewGroup {
 			view.setOnClickListener(new OnClickListener() {
 
 				@Override public void onClick(View v) {
-					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoicesIrregularLayout.this, view, finalI, list.get(finalI));
+					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoiceIrregularLayout.this, view, finalI, list.get(finalI));
 				}
 			});
 		}

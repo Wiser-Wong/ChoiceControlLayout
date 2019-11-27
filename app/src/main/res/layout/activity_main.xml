@@ -19,7 +19,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <com.wiser.choice.ChoicesControlLayout
+        <com.wiser.choice.ChoiceControlLayout
             android:id="@+id/ccl_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <com.wiser.choice.ChoicesRuleLayout
+        <com.wiser.choice.ChoiceRuleLayout
             android:id="@+id/cl_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
-        <com.wiser.choice.ChoicesIrregularLayout
+        <com.wiser.choice.ChoiceIrregularLayout
             android:id="@+id/cil_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

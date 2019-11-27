@@ -5,7 +5,7 @@ package com.taikang.choiceslayout;
  * 
  *         选择数据
  */
-public class ChoicesModel {
+public class ChoiceModel {
 
 	public String name;
 

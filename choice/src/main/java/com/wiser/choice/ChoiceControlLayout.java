@@ -17,24 +17,24 @@ import android.view.View;
  *
  *         选择控件
  */
-public class ChoicesControlLayout<T> extends RecyclerView implements OnChoiceCallBack<T> {
+public class ChoiceControlLayout<T> extends RecyclerView implements OnChoiceCallBack<T> {
 
 	private int								choiceLayoutId;
 
 	private int								spanCount	= 3;
 
-	private ChoicesRecycleViewAdapter<T>	choicesRecycleViewAdapter;
+	private ChoiceRecycleViewAdapter<T> choiceRecycleViewAdapter;
 
 	private OnChoiceAdapter<T>				onChoiceAdapter;
 
 	private OnChoiceListener<T>				onChoiceListener;
 
-	public ChoicesControlLayout(@NonNull Context context) {
+	public ChoiceControlLayout(@NonNull Context context) {
 		super(context);
 		init(context, null);
 	}
 
-	public ChoicesControlLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+	public ChoiceControlLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		init(context, attrs);
 	}
@@ -42,10 +42,10 @@ public class ChoicesControlLayout<T> extends RecyclerView implements OnChoiceCal
 	// 初始化
 	private void init(Context context, AttributeSet attrs) {
 
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoicesControlLayout);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ChoiceControlLayout);
 		if (ta != null) {
-			choiceLayoutId = ta.getResourceId(R.styleable.ChoicesControlLayout_ccl_layoutId, -1);
-			spanCount = ta.getInt(R.styleable.ChoicesControlLayout_ccl_spanCount, spanCount);
+			choiceLayoutId = ta.getResourceId(R.styleable.ChoiceControlLayout_ccl_layoutId, -1);
+			spanCount = ta.getInt(R.styleable.ChoiceControlLayout_ccl_spanCount, spanCount);
 			ta.recycle();
 		}
 
@@ -56,8 +56,8 @@ public class ChoicesControlLayout<T> extends RecyclerView implements OnChoiceCal
 		// 去掉自带滑动
 		setOverScrollMode(OVER_SCROLL_NEVER);
 		setLayoutManager(new GridLayoutManager(getContext(), spanCount));
-		setAdapter(choicesRecycleViewAdapter = new ChoicesRecycleViewAdapter<>(getContext(), choicesLayoutId()));
-		choicesRecycleViewAdapter.setOnChoiceCallBack(this);
+		setAdapter(choiceRecycleViewAdapter = new ChoiceRecycleViewAdapter<>(getContext(), choicesLayoutId()));
+		choiceRecycleViewAdapter.setOnChoiceCallBack(this);
 	}
 
 	private int choicesLayoutId() {
@@ -66,19 +66,19 @@ public class ChoicesControlLayout<T> extends RecyclerView implements OnChoiceCal
 	}
 
 	public void setItems(List<T> list) {
-		if (choicesRecycleViewAdapter != null) choicesRecycleViewAdapter.setItems(list);
+		if (choiceRecycleViewAdapter != null) choiceRecycleViewAdapter.setItems(list);
 	}
 
 	// 更新数据
 	public void notifyItemPositionData(int position, T t) {
-		choicesRecycleViewAdapter.getItems().set(position, t);
-		choicesRecycleViewAdapter.notifyItemChanged(position);
+		choiceRecycleViewAdapter.getItems().set(position, t);
+		choiceRecycleViewAdapter.notifyItemChanged(position);
 	}
 
 	public void setChoiceAdapter(OnChoiceAdapter<T> onChoiceAdapter) {
 		if (this.onChoiceAdapter == null) {
 			this.onChoiceAdapter = onChoiceAdapter;
-			if (choicesRecycleViewAdapter != null) choicesRecycleViewAdapter.setOnChoiceAdapter(onChoiceAdapter);
+			if (choiceRecycleViewAdapter != null) choiceRecycleViewAdapter.setOnChoiceAdapter(onChoiceAdapter);
 		}
 	}
 
