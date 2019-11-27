@@ -9,6 +9,6 @@ import android.view.View;
  */
 public interface OnChoiceAdapter<T> {
 
-	void onCreateItemView(View itemView, T t, int position);
+	void onCreateItemView(View itemView, int position, T t);
 
 }

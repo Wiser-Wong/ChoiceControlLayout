@@ -10,19 +10,25 @@ import android.view.ViewGroup;
  * 
  *         选择适配器
  */
-public class ChoicesAdapter<T> extends BaseAdapter<T, ChoicesAdapter.ChoicesHolder> {
+public class ChoicesRecycleViewAdapter<T> extends BaseAdapter<T, ChoicesRecycleViewAdapter.ChoicesHolder> {
 
 	private int					choiceLayoutId;
 
-	private OnChoiceAdapter<T> onChoiceAdapter;
+	private OnChoiceAdapter<T>	onChoiceAdapter;
 
-	ChoicesAdapter(Context context, int choiceLayoutId) {
+	private OnChoiceCallBack<T>	onChoiceCallBack;
+
+	ChoicesRecycleViewAdapter(Context context, int choiceLayoutId) {
 		super(context);
 		this.choiceLayoutId = choiceLayoutId;
 	}
 
 	void setOnChoiceAdapter(OnChoiceAdapter<T> onChoiceAdapter) {
 		this.onChoiceAdapter = onChoiceAdapter;
+	}
+
+	void setOnChoiceCallBack(OnChoiceCallBack<T> onChoiceCallBack) {
+		this.onChoiceCallBack = onChoiceCallBack;
 	}
 
 	@Override public ChoicesHolder newViewHolder(ViewGroup viewGroup, int type) {
@@ -36,9 +42,14 @@ public class ChoicesAdapter<T> extends BaseAdapter<T, ChoicesAdapter.ChoicesHold
 		}
 
 		@Override public void bindData(final T t, final int position) {
-			if (onChoiceAdapter != null) onChoiceAdapter.onCreateItemView(itemView, t, position);
-		}
+			if (onChoiceAdapter != null) onChoiceAdapter.onCreateItemView(itemView, position, t);
+			itemView.setOnClickListener(new View.OnClickListener() {
 
+				@Override public void onClick(View v) {
+					if (onChoiceCallBack != null) onChoiceCallBack.callBackAdapterClick(itemView, position, t);
+				}
+			});
+		}
 	}
 
 }

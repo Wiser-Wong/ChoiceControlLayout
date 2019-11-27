@@ -4,37 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wiser.choice.ChoicesControlLayout;
+import com.wiser.choice.ChoicesIrregularLayout;
+import com.wiser.choice.ChoicesRuleLayout;
 import com.wiser.choice.OnChoiceAdapter;
+import com.wiser.choice.OnChoiceListener;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements OnChoiceAdapter<ChoicesModel> {
+public class MainActivity extends AppCompatActivity implements OnChoiceAdapter<ChoicesModel>, OnChoiceListener<ChoicesModel> {
 
-	ChoicesControlLayout<ChoicesModel>	choicesControlLayout;
+	ChoicesControlLayout<ChoicesModel>		choicesControlLayout;
 
-	ChoicesControlLayout<ChoicesModel>	choicesControlLayout1;
+	ChoicesRuleLayout<ChoicesModel>			choicesRuleLayout;
 
-	ChoicesControlLayout<ChoicesModel>	choicesControlLayout2;
+	ChoicesIrregularLayout<ChoicesModel>	choicesIrregularLayout;
 
 	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		choicesControlLayout = findViewById(R.id.ccl_layout);
-		choicesControlLayout1 = findViewById(R.id.ccl_layout1);
-		choicesControlLayout2 = findViewById(R.id.ccl_layout2);
-
-		choicesControlLayout.setItems(choicesModels());
-		choicesControlLayout1.setItems(choicesModels());
-		choicesControlLayout2.setItems(choicesModels());
+		choicesRuleLayout = findViewById(R.id.cl_layout);
+		choicesIrregularLayout = findViewById(R.id.cil_layout);
 
 		choicesControlLayout.setOnChoiceAdapter(this);
-		choicesControlLayout1.setOnChoiceAdapter(this);
-		choicesControlLayout2.setOnChoiceAdapter(this);
+		choicesControlLayout.setOnChoiceListener(this);
+		choicesRuleLayout.setOnChoiceListener(this);
+		choicesIrregularLayout.setOnChoiceListener(this);
+		choicesRuleLayout.setChoiceAdapter(this);
+		choicesIrregularLayout.setChoiceAdapter(this);
+
+		choicesControlLayout.setItems(choicesModels());
+		choicesRuleLayout.setItems(choicesModels());
+		choicesIrregularLayout.setItems(choicesModelsIrregular());
+
+
 	}
 
 	private List<ChoicesModel> choicesModels() {
@@ -47,7 +56,19 @@ public class MainActivity extends AppCompatActivity implements OnChoiceAdapter<C
 		return list;
 	}
 
-	@Override public void onCreateItemView(final View itemView, final ChoicesModel choicesModel, final int position) {
+	private List<ChoicesModel> choicesModelsIrregular() {
+		List<ChoicesModel> list = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			ChoicesModel choicesModel = new ChoicesModel();
+			if (i < 2) choicesModel.name = ("第顶顶顶顶顶" + i + "个");
+			if (i >= 2 && i <= 5) choicesModel.name = ("第" + i + "个");
+			if (i > 5) choicesModel.name = ("第" + i + "顶顶顶顶顶顶顶顶顶个");
+			list.add(choicesModel);
+		}
+		return list;
+	}
+
+	@Override public void onCreateItemView(final View itemView, final int position, final ChoicesModel choicesModel) {
 		if (choicesModel == null) return;
 		TextView tvChoiceName = itemView.findViewById(R.id.tv_choice_name);
 		ImageView ivChoiceIcon = itemView.findViewById(R.id.iv_choice_icon);
@@ -59,15 +80,13 @@ public class MainActivity extends AppCompatActivity implements OnChoiceAdapter<C
 			ivChoiceIcon.setVisibility(View.GONE);
 		}
 		tvChoiceName.setText(choicesModel.name);
-
-		itemView.setOnClickListener(new View.OnClickListener() {
-
-			@Override public void onClick(View v) {
-				choicesModel.isCheck = !choicesModel.isCheck;
-				if (itemView.getParent().equals(choicesControlLayout)) choicesControlLayout.notifyItemPositionData(position, choicesModel);
-				if (itemView.getParent().equals(choicesControlLayout1)) choicesControlLayout1.notifyItemPositionData(position, choicesModel);
-				if (itemView.getParent().equals(choicesControlLayout2)) choicesControlLayout2.notifyItemPositionData(position, choicesModel);
-			}
-		});
 	}
+
+	@Override public void onChoiceItemClick(ViewGroup viewGroup,View view, int position, ChoicesModel choicesModel) {
+		choicesModel.isCheck = !choicesModel.isCheck;
+		if (viewGroup.equals(choicesControlLayout)) choicesControlLayout.notifyItemPositionData(position, choicesModel);
+		if (viewGroup.equals(choicesRuleLayout)) choicesRuleLayout.notifyItemPositionData(position, choicesModel);
+		if (viewGroup.equals(choicesIrregularLayout)) choicesIrregularLayout.notifyItemPositionData(position, choicesModel);
+	}
+
 }

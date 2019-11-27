@@ -1,28 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <com.wiser.choice.ChoicesControlLayout
-        android:id="@+id/ccl_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ccl_LayoutId="@layout/choice_item"
-        app:ccl_spanCount="4" />
-    <com.wiser.choice.ChoicesControlLayout
-        android:id="@+id/ccl_layout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ccl_LayoutId="@layout/choice_item"
-        app:ccl_spanCount="4" />
-    <com.wiser.choice.ChoicesControlLayout
-        android:id="@+id/ccl_layout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ccl_LayoutId="@layout/choice_item"
-        app:ccl_spanCount="4" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="ChoicesControlLayout是RecycleView实现"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <com.wiser.choice.ChoicesControlLayout
+            android:id="@+id/ccl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ccl_layoutId="@layout/choice_item"
+            app:ccl_spanCount="4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="ChoicesRuleLayout规则平分排版"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <com.wiser.choice.ChoicesRuleLayout
+            android:id="@+id/cl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:crl_layoutId="@layout/choice_item"
+            android:layout_marginTop="10dp"
+            app:crl_spanCount="3" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="ChoicesIrregularLayout不规则布局排版"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <com.wiser.choice.ChoicesIrregularLayout
+            android:id="@+id/cil_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            app:cil_isFillSurplusWidth="false"
+            app:cil_layoutId="@layout/choice_item" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
