@@ -75,7 +75,7 @@ public class ChoicesControlLayout<T> extends RecyclerView implements OnChoiceCal
 		choicesRecycleViewAdapter.notifyItemChanged(position);
 	}
 
-	public void setOnChoiceAdapter(OnChoiceAdapter<T> onChoiceAdapter) {
+	public void setChoiceAdapter(OnChoiceAdapter<T> onChoiceAdapter) {
 		if (this.onChoiceAdapter == null) {
 			this.onChoiceAdapter = onChoiceAdapter;
 			if (choicesRecycleViewAdapter != null) choicesRecycleViewAdapter.setOnChoiceAdapter(onChoiceAdapter);
