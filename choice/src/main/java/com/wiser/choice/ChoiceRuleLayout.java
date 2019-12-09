@@ -74,8 +74,12 @@ public class ChoiceRuleLayout<T> extends LinearLayout {
 		layout.setLayoutParams(params);
 		layout.setOrientation(LinearLayout.HORIZONTAL);
 		addView(layout);
-
-		int size = list.size() + spanCount - list.size() % spanCount;
+		int size;
+		if (list.size() % spanCount == 0){
+			size = list.size();
+		}else {
+			size = list.size() + spanCount - list.size() % spanCount;
+		}
 		for (int i = 0; i < size; i++) {
 			if (i > 0 && i % spanCount == 0) {
 				layout = new LinearLayout(getContext());
