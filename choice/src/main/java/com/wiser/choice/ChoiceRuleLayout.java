@@ -20,19 +20,19 @@ import android.widget.LinearLayout;
  */
 public class ChoiceRuleLayout<T> extends LinearLayout {
 
-	private int						spanCount	= 3;
+	private int					spanCount	= 3;
 
-	private int						choiceLayoutId;
+	private int					choiceLayoutId;
 
-	private LayoutInflater			mInflater;
+	private LayoutInflater		mInflater;
 
-	private List<T>					list;
+	private List<T>				list;
 
-	private OnChoiceListener<T> onChoiceListener;
+	private OnChoiceListener<T>	onChoiceListener;
 
-	private OnChoiceAdapter<T>		onChoiceAdapter;
+	private OnChoiceAdapter<T>	onChoiceAdapter;
 
-	private List<View>				views		= new ArrayList<>();
+	private List<View>			views		= new ArrayList<>();
 
 	public ChoiceRuleLayout(Context context) {
 		super(context);
@@ -58,6 +58,10 @@ public class ChoiceRuleLayout<T> extends LinearLayout {
 		setOrientation(LinearLayout.VERTICAL);
 	}
 
+	public void notifyList(List<T> list) {
+		this.list = list;
+	}
+
 	public void setItems(List<T> list) {
 		if (list == null || list.size() == 0) return;
 		this.list = list;
@@ -70,14 +74,14 @@ public class ChoiceRuleLayout<T> extends LinearLayout {
 
 		// 每一行父布局
 		LinearLayout layout = new LinearLayout(getContext());
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		layout.setLayoutParams(params);
 		layout.setOrientation(LinearLayout.HORIZONTAL);
 		addView(layout);
 		int size;
-		if (list.size() % spanCount == 0){
+		if (list.size() % spanCount == 0) {
 			size = list.size();
-		}else {
+		} else {
 			size = list.size() + spanCount - list.size() % spanCount;
 		}
 		for (int i = 0; i < size; i++) {
@@ -112,7 +116,7 @@ public class ChoiceRuleLayout<T> extends LinearLayout {
 			view.setOnClickListener(new OnClickListener() {
 
 				@Override public void onClick(View v) {
-					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoiceRuleLayout.this,view, position, t);
+					if (onChoiceListener != null) onChoiceListener.onChoiceItemClick(ChoiceRuleLayout.this, view, position, t);
 				}
 			});
 		}
@@ -139,6 +143,13 @@ public class ChoiceRuleLayout<T> extends LinearLayout {
 	public void notifyDataSetChanged() {
 		if (list == null || list.size() == 0) return;
 		removeAllViews();
+		setView();
+	}
+
+	public void notifyDataSetChanged(List<T> list) {
+		removeAllViews();
+		this.list = list;
+		if (this.list == null || this.list.size() == 0) return;
 		setView();
 	}
 
