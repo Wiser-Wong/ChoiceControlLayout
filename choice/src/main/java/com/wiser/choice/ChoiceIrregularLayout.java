@@ -77,8 +77,6 @@ public class ChoiceIrregularLayout<T> extends ViewGroup {
 		// 获取控件的宽度
 		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		widthSize = widthSize - getPaddingLeft() - getPaddingRight();
-		// 这种方式有可能是为0
-		System.out.println("widthSize :" + widthSize);
 		int count = getChildCount();
 		mCurrentLine = new Line();
 		for (int i = 0; i < count; i++) {
@@ -104,7 +102,6 @@ public class ChoiceIrregularLayout<T> extends ViewGroup {
 		if (!lineList.contains(mCurrentLine)) {
 			lineList.add(mCurrentLine);
 		}
-		System.out.println("lineList.size() :" + lineList.size());
 		int totalHeight = 0;
 		for (int i = 0; i < lineList.size(); i++) {
 			Line line = lineList.get(i);
@@ -151,7 +148,6 @@ public class ChoiceIrregularLayout<T> extends ViewGroup {
 		void layout(int left, int top) {
 			for (int i = 0; i < lineViews.size(); i++) {
 				View childView = lineViews.get(i);
-				System.out.println("measuredWidth :" + childView.getMeasuredWidth());
 				childView.layout(left, top, left + childView.getMeasuredWidth(), top + childView.getMeasuredHeight());
 				left = left + childView.getMeasuredWidth() + mHorizontalSpacing;
 			}
