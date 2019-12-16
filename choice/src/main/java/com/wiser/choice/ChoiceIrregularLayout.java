@@ -252,6 +252,17 @@ public class ChoiceIrregularLayout<T> extends ViewGroup {
 		setView();
 	}
 
+	public void notifyDataSetChanged(List<T> list) {
+		removeAllViews();
+		this.list = list;
+		if (this.list == null || this.list.size() == 0) return;
+		setView();
+	}
+
+	public void notifyList(List<T> list) {
+		this.list = list;
+	}
+
 	public void setChoiceAdapter(OnChoiceAdapter<T> onChoiceAdapter) {
 		this.onChoiceAdapter = onChoiceAdapter;
 	}
