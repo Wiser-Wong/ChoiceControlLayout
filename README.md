@@ -13,7 +13,7 @@
       }
 
         dependencies {
-              implementation 'com.github.Wiser-Wong:ChoiceControlLayout:1.4.0'
+              implementation 'com.github.Wiser-Wong:ChoiceControlLayout:1.5.0'
       }
 
 ## 使用说明
