@@ -33,12 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnChoiceAdapter<C
 		choiceIrregularLayout = findViewById(R.id.cil_layout);
 
 		choiceControlLayout.setChoiceAdapter(this);
-		choiceControlLayout.setOnChoiceListener(new OnChoiceListener<ChoiceModel>() {
-			@Override
-			public void onChoiceItemClick(ViewGroup viewGroup, View view, int position, ChoiceModel choiceModel) {
-
-			}
-		});
+		choiceControlLayout.setOnChoiceListener(this);
 		choiceRuleLayout.setOnChoiceListener(this);
 		choiceIrregularLayout.setOnChoiceListener(this);
 		choiceRuleLayout.setChoiceAdapter(this);
