@@ -16,7 +16,7 @@ public class ChoiceRecycleViewAdapter<T> extends BaseAdapter<T, ChoiceRecycleVie
 
 	private OnChoiceAdapter<T>	onChoiceAdapter;
 
-	private OnChoiceCallBack<T>	onChoiceCallBack;
+	private OnChoiceRecycleClickListener<T> onChoiceRecycleClickListener;
 
 	ChoiceRecycleViewAdapter(Context context, int choiceLayoutId) {
 		super(context);
@@ -27,8 +27,8 @@ public class ChoiceRecycleViewAdapter<T> extends BaseAdapter<T, ChoiceRecycleVie
 		this.onChoiceAdapter = onChoiceAdapter;
 	}
 
-	void setOnChoiceCallBack(OnChoiceCallBack<T> onChoiceCallBack) {
-		this.onChoiceCallBack = onChoiceCallBack;
+	void setOnChoiceRecycleClickListener(OnChoiceRecycleClickListener<T> onChoiceRecycleClickListener) {
+		this.onChoiceRecycleClickListener = onChoiceRecycleClickListener;
 	}
 
 	@Override public ChoicesHolder newViewHolder(ViewGroup viewGroup, int type) {
@@ -46,7 +46,7 @@ public class ChoiceRecycleViewAdapter<T> extends BaseAdapter<T, ChoiceRecycleVie
 			itemView.setOnClickListener(new View.OnClickListener() {
 
 				@Override public void onClick(View v) {
-					if (onChoiceCallBack != null) onChoiceCallBack.callBackAdapterClick(itemView, position, t);
+					if (onChoiceRecycleClickListener != null) onChoiceRecycleClickListener.callBackAdapterClick(itemView, position, t);
 				}
 			});
 		}

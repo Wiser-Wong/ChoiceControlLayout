@@ -17,7 +17,7 @@ import android.view.View;
  *
  *         选择控件
  */
-public class ChoiceControlLayout<T> extends RecyclerView implements OnChoiceCallBack<T> {
+public class ChoiceControlLayout<T> extends RecyclerView implements OnChoiceRecycleClickListener<T> {
 
 	private int								choiceLayoutId;
 
@@ -57,7 +57,7 @@ public class ChoiceControlLayout<T> extends RecyclerView implements OnChoiceCall
 		setOverScrollMode(OVER_SCROLL_NEVER);
 		setLayoutManager(new GridLayoutManager(getContext(), spanCount));
 		setAdapter(choiceRecycleViewAdapter = new ChoiceRecycleViewAdapter<>(getContext(), choicesLayoutId()));
-		choiceRecycleViewAdapter.setOnChoiceCallBack(this);
+		choiceRecycleViewAdapter.setOnChoiceRecycleClickListener(this);
 	}
 
 	private int choicesLayoutId() {
